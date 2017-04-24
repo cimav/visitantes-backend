@@ -68,6 +68,6 @@ class VisitasController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def visita_params
-    params.require(:visita).permit(:entrada, :salida, :visitante_id, :empleado_id, :nota)
+    params.require(:visita).permit(:entrada, :salida, :visitante_id, :empleado_id, :nota, :gafete)
   end
 end
