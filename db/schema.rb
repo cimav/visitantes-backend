@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324191222) do
+ActiveRecord::Schema.define(version: 20170424171452) do
 
   create_table "empleados", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "nombre"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170324191222) do
     t.string   "avatar"
     t.string   "empresa"
     t.text     "nota",       limit: 65535
+    t.integer  "tipo"
   end
 
   create_table "visitas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170324191222) do
     t.integer  "empleado_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "gafete"
     t.index ["empleado_id"], name: "index_visitas_on_empleado_id", using: :btree
     t.index ["visitante_id"], name: "index_visitas_on_visitante_id", using: :btree
   end
