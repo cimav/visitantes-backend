@@ -44,11 +44,13 @@ class VisitasController < ApplicationController
   # PATCH/PUT /visitas/1
   def update
 
-    if visita_params[:salida]
-      visita_params[:salida] = Time.current
+    vis_params = visita_params
+
+    if vis_params[:salida]
+      vis_params[:salida] = Time.current
     end
 
-    if @visita.update(visita_params)
+    if @visita.update(vis_params)
       render json: @visita
     else
       render json: @visita.errors, status: :unprocessable_entity
