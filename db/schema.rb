@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424171452) do
+ActiveRecord::Schema.define(version: 20170824183450) do
+
+  create_table "categorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "categoria"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "file"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "categoria_id"
+    t.integer  "proveedor_id"
+    t.string   "attachment"
+    t.string   "orden_compra"
+    t.index ["categoria_id"], name: "index_documentos_on_categoria_id", using: :btree
+    t.index ["proveedor_id"], name: "index_documentos_on_proveedor_id", using: :btree
+  end
 
   create_table "empleados", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "nombre"
@@ -22,6 +40,24 @@ ActiveRecord::Schema.define(version: 20170424171452) do
     t.string   "image"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "proveedores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "rfc"
+    t.string   "password"
+    t.string   "razon_social"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+    t.string   "email"
+  end
+
+  create_table "resumes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "code"
   end
 
   create_table "visitantes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -45,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170424171452) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.string   "gafete"
+    t.integer  "sede"
     t.index ["empleado_id"], name: "index_visitas_on_empleado_id", using: :btree
     t.index ["visitante_id"], name: "index_visitas_on_visitante_id", using: :btree
   end

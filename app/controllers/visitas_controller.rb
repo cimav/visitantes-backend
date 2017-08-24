@@ -32,7 +32,7 @@ class VisitasController < ApplicationController
 
   def adentro
 
-    result = Visita.where('salida IS NULL')
+    result = Visita.where('salida IS NULL and sede = :sede', {:sede=>params[:sede]})
 
     render json: result.to_json(:include => [:empleado, :visitante])
 
@@ -70,6 +70,6 @@ class VisitasController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def visita_params
-    params.require(:visita).permit(:entrada, :salida, :visitante_id, :empleado_id, :nota, :gafete)
+    params.require(:visita).permit(:entrada, :salida, :visitante_id, :empleado_id, :nota, :gafete, :sede)
   end
 end
