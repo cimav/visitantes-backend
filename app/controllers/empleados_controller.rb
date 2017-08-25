@@ -12,6 +12,7 @@ class EmpleadosController < ApplicationController
     render json: @empleado
   end
 
+=begin
   def create
 
     @empleado = Empleado.new(empl_params)
@@ -34,6 +35,7 @@ class EmpleadosController < ApplicationController
   def destroy
     @empleado.destroy
   end
+=end
 
   private
   # Use callbacks to share common setup or constraints between actions.
