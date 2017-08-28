@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :visitantes
   resources :visitas
-  resources :empleados
   resources :personas
 
   get '/visitantes/avatar/:id', to: 'visitantes#avatar'

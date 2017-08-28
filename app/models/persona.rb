@@ -1,5 +1,8 @@
 class Persona < NetmultixRecord
 
+=begin
+ self.primary_key = 'clave'
+
   attribute :id, :integer
 
   def id # getter
@@ -12,6 +15,8 @@ class Persona < NetmultixRecord
     end
 
   end
+
+=end
 
 end
 

@@ -12,8 +12,6 @@ class VisitantesController < ApplicationController
 
     # @question = Question.where(category_id: @category.id) .where("id NOT IN(select question_id from memories where user_id = ?)",
 
-#    render :json => visitantes.to_json(:include => {:visitas => {:include => :empleado} })
-
   end
 
   def avatar
@@ -48,10 +46,10 @@ class VisitantesController < ApplicationController
   def last
     visitante = Visitante.find(params[:id]) rescue nil
     if visitante
-      visita = Visita.includes(:empleado).where(:visitante_id => params[:id]).order(:entrada => :desc).first rescue nil
+      visita = Visita.includes(:persona).where(:visitante_id => params[:id]).order(:entrada => :desc).first rescue nil
       if visita
-        if visita.empleado
-          visitante = visitante.attributes.merge({visita: visita.attributes.merge({empleado: visita.empleado})})
+        if visita.persona
+          visitante = visitante.attributes.merge({visita: visita.attributes.merge({persona: visita.persona})})
         else
           visitante = visitante.attributes.merge({visita:visita})
         end
@@ -138,6 +136,6 @@ class VisitantesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def visita_params
-      params.require(:visitante).permit(:rfc, :apellido, :nombre, :avatar, :nota, :empresa, :tipo)
+      params.require(:visitante).permit(:rfc, :apellido, :nombre, :avatar, :nota, :persona, :tipo)
     end
 end

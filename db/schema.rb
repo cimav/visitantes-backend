@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824183450) do
+ActiveRecord::Schema.define(version: 20170828183432) do
 
   create_table "categorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "categoria"
@@ -77,12 +77,12 @@ ActiveRecord::Schema.define(version: 20170824183450) do
     t.datetime "salida"
     t.text     "nota",         limit: 65535
     t.integer  "visitante_id"
-    t.integer  "empleado_id"
+    t.integer  "persona_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.string   "gafete"
     t.integer  "sede"
-    t.index ["empleado_id"], name: "index_visitas_on_empleado_id", using: :btree
+    t.index ["persona_id"], name: "index_visitas_on_persona_id", using: :btree
     t.index ["visitante_id"], name: "index_visitas_on_visitante_id", using: :btree
   end
 

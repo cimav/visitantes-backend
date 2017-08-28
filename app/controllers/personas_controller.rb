@@ -4,7 +4,7 @@ class PersonasController < ApplicationController
 
     personas = Persona.all
 
-    render json: personas, :msg => 'holas'
+    render json: personas
   end
 
   def create

@@ -23,7 +23,7 @@ class VisitasController < ApplicationController
   end
 
   def last
-    render json: Visita.where(:visitante_id => params[:visitante_id]).order(:entrada => :desc).first.to_json(:include => :empleado)
+    render json: Visita.where(:visitante_id => params[:visitante_id]).order(:entrada => :desc).first.to_json(:include => :persona)
   end
 
   def show
@@ -34,7 +34,7 @@ class VisitasController < ApplicationController
 
     result = Visita.where('salida IS NULL and sede = :sede', {:sede=>params[:sede]})
 
-    render json: result.to_json(:include => [:empleado, :visitante])
+    render json: result.to_json(:include => [:persona, :visitante])
 
 
     #Visitante.select('*').joins(:visitas).where('visitas.salida is null')
@@ -70,6 +70,6 @@ class VisitasController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def visita_params
-    params.require(:visita).permit(:entrada, :salida, :visitante_id, :empleado_id, :nota, :gafete, :sede)
+    params.require(:visita).permit(:entrada, :salida, :visitante_id, :persona_id, :nota, :gafete, :sede)
   end
 end
