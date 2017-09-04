@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/count', to: 'visitantes#count'
   get '/visitantes/last/:id', to: 'visitantes#last'
   get '/visitas/last/:visitante_id', to: 'visitas#last'
+  get '/proveedores', to: 'personas#proveedores'
 
 end

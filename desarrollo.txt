@@ -7,7 +7,7 @@ create table personas (
     nombre VARCHAR(200),
     sede int,
     PRIMARY KEY (id)
-);
+) CHARSET utf8 COLLATE utf8_spanish_ci;
 
 delimiter //
 DROP TRIGGER IF EXISTS id_for_personas;
@@ -23,7 +23,7 @@ END;//
 delimiter ;
 
 insert into personas
-  SELECT  DISTINCT 0 as id, pv01_clave as clave, 2 as tipo, PV01_NOMBRE as nombre, CO05_UBICACION as sede FROM  co05,pv01
+  SELECT  DISTINCT 0 as id, pv01_clave as clave, 2 as tipo,  PV01_NOMBRE as nombre, CO05_UBICACION as sede FROM  co05,pv01
     WHERE CO05_CVE_PROV =PV01_CLAVE
     AND CO05_PEDIDO IN ( SELECT   CO06A_PEDIDO FROM co06a WHERE ( CO06A_CANT_PED - CO06A_CANT_REC) >= 0 and CO06A_PARTIDA = '33901')
     GROUP BY clave

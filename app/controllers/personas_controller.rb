@@ -7,6 +7,12 @@ class PersonasController < ApplicationController
     render json: personas
   end
 
+  def proveedores
+
+    personas = Persona.where("tipo = 2")
+    render json: personas
+  end
+
   def create
     Persona.create(person_params)
   end
