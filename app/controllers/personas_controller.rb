@@ -9,12 +9,9 @@ class PersonasController < ApplicationController
 
   def proveedores
 
-    personas = Persona.where("tipo = 2")
-    render json: personas
-  end
+    personas = Persona.where("tipo = 2 AND sede = :sede", {:sede=>params[:sede]})
 
-  def create
-    Persona.create(person_params)
+    render json: personas
   end
 
   private
