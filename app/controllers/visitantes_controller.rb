@@ -124,8 +124,8 @@ class VisitantesController < ApplicationController
   end
 
   def count
-    @visitantes = Visitante.all
-    return @visitantes.length rescue -1;
+    answer = Visitante.count(:id) rescue -1
+    render json: answer
   end
 
   private
