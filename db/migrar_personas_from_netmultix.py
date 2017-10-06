@@ -97,7 +97,7 @@ try:
     curFuente.close()
     conxCimavNetmultixDestino.commit()
     conxCimavNetmultixDestino.close()
-    cnnNetmultixFuente.commit()
+    cnnNetmultixFuente.close()
 
 except mysql.connector.Error as e:
 	print(e)
