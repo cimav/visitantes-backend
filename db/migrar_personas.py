@@ -4,7 +4,7 @@ from mysql.connector import errorcode
 
 try:
     cnnNetmultix = mysql.connector.connect(
-		user='netmultix',
+	    user='netmultix',
 		password='N3tMult1x@CIMAV',
 		host='10.0.0.13',
 		database='netmultix')
@@ -54,6 +54,8 @@ try:
 
         # curNetmultix.execute(""" delimiter ;""")
 
+        # print('1> ', sql_stmt);
+
         curNetmultix.execute("""insert into personas """ + sql_stmt)
 
     else:
@@ -70,6 +72,9 @@ try:
                 nombre = empleado_proveedor[3].strip()
                 sede = empleado_proveedor[4]
                 sql_insert = """INSERT INTO personas VALUES (0,'%s',%s,'%s',%s);""" % (clave,tipo,nombre,sede)
+
+                # print('2> ', sql_insert)
+
                 curNetmultixPersonas.execute(sql_insert)
 
         curNetmultixPersonas.close()
