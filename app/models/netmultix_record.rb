@@ -8,7 +8,7 @@ class NetmultixRecord < ActiveRecord::Base
       username: "netmultix",
       password: "N3tMult1x@CIMAV",
       socket: "/tmp/mysql.sock",
-      database: "netmultix"
+      database: "cimavnetmultix"
   )
 
   self.abstract_class = true
