@@ -1,4 +1,5 @@
 class VisitasController < ApplicationController
+
   before_action :set_visitante, only: [:show, :update, :destroy]
 
   def index
@@ -35,9 +36,6 @@ class VisitasController < ApplicationController
     result = Visita.where('salida IS NULL and sede = :sede', {:sede=>params[:sede]})
 
     render json: result.to_json(:include => [:persona, :visitante])
-
-
-    #Visitante.select('*').joins(:visitas).where('visitas.salida is null')
 
   end
 

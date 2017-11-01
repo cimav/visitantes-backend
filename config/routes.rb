@@ -10,4 +10,10 @@ Rails.application.routes.draw do
   get '/visitas/last/:visitante_id', to: 'visitas#last'
   get '/proveedores/:sede', to: 'personas#proveedores'
 
+  resources :main
+  get 'main/index'
+  get 'main/grid/:inicial/:final/:apellido/:empresa/:persona', to: 'main#grid'
+
+  root to: 'main#index'
+
 end

@@ -1,0 +1,107 @@
+%table#grid-basic.table.table-condensed.table-hover.table-striped
+  %thead
+    %tr
+      %th{:'data-column-id'=>"nombre", :'data-type'=>"string"} Nombre
+      %th{:'data-column-id'=>"apellido", :'data-type'=>"string"} Apellido
+      %th{:'data-column-id'=>"empresa", :'data-type'=>"string"} Empresa
+      %th{:'data-column-id'=>"entrada", :'data-type'=>"date", 'data-formatter'=>"fecha"} Entrada
+      %th{:'data-column-id'=>"salida", :'data-type'=>"date", 'data-formatter'=>"fecha"} Salida
+      %th{:'data-column-id'=>"persona", :'data-type'=>"string"} Visita a
+  %tbody
+    -@registros.each do |registro|
+      %tr
+        %td
+          =registro.visitante.nombre rescue '--'
+        %td
+          =registro.visitante.apellido rescue '--'
+        %td
+          =registro.visitante.empresa rescue '++'
+        %td
+          =registro.entrada
+        %td
+          =registro.salida
+        %td
+          =registro.persona.nombre rescue '**'
+
+  :javascript
+
+    $(document).ready(function() {
+
+      $('.fechas').unbind().change(function(event) {
+        filtrar(event, false);
+      });
+
+      $('#btnFiltrar').unbind().click(function(event) {
+        filtrar(event, false);
+      });
+
+      $('#btnExcel').unbind().click(function(event) {
+        filtrar(event, true);
+      });
+
+    });
+
+      function filtrar(event, isExcel){
+
+        var inicial = $('#inicial').val();
+        var final = $('#final').val();
+
+        inicial = inicial.trim().length <=0 ? "nil" : inicial;
+        final = final.trim().length <=0 ? "nil" : final;
+
+        var apellido = $('#apellido').val().trim();
+        var empresa = $('#empresa').val().trim();
+        var persona = $('#persona').val().trim();
+
+        if (!apellido || 0 === apellido.length) {
+          apellido = null;
+        }
+        if (!empresa || 0 === empresa.length) {
+          empresa = null;
+        }
+        if (!persona || 0 === persona.length) {
+          persona = null;
+        }
+
+        var url = "main/grid/" + inicial + "/" + final + "/" + apellido + "/" + empresa + "/"  + persona;
+
+        if (isExcel) {
+          url = url + '.xlsx';
+          window.open(url, "_self");
+        } else {
+          $.ajax({
+            url: url,
+            success: function(result){
+              $("#grid_visitas").html(result);
+            },
+            error: function (jqXHR, exception) {
+              $("#grid_visitas").html("<h3>Error en el servidor. Intente recargando.</h3>");
+            }
+          });
+        }
+      };
+
+    $("#grid-basic").bootgrid({
+      navigation: 2,
+      caseSensitive: false,
+      rowCount: 50,
+      labels: {
+        all: "Todos",
+        infos: "Mostrando del {{ctx.start}} al {{ctx.end}} de {{ctx.total}} registros",
+        loading: "Cargando...",
+        noResults: "No hay resultados",
+        refresh: "Recargar",
+        search: "Buscar"
+      },
+      searchSettings: {
+        delay: 100,
+        characters: 3
+      },
+      formatters: {
+        fecha: function (column, row) {
+            return row[column.id].length < 10 ? '' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
+        }
+      }
+    });
+
+

@@ -1,0 +1,24 @@
+
+### https://www.sitepoint.com/generate-excel-spreadsheets-rails-axlsx-gem/
+
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+
+#    header_style = style.add_style bg_color: "00", fg_color: "FF", bold: true, alignment: { horizontal: :center }
+    header_style = style.add_style bold: true, alignment: { horizontal: :center }
+#    highlight_cell = style.add_style(bg_color: "EFC376", alignment: { horizontal: :center })
+    date_cell = style.add_style(format_code: "yyyy-mm-dd HH:mm")
+
+    wb.add_worksheet(name: "Visitas") do |sheet|
+
+        sheet.add_row ['ID',  'Visitante', 'Empresa', 'Entrada', 'Salida', 'Visita A',  'Nota'], style: header_style
+
+        @registros.each do |registro|
+            # sheet.add_row [registro.id, registro.entrada, registro.nota], style: [nil, date_cell, highlight_cell]
+            sheet.add_row [registro.id, registro.visitante.nombre_completo, registro.visitante.empresa, registro.entrada, registro.salida, registro.persona.nombre, registro.nota]
+        end
+    end
+
+end
+

@@ -1,11 +1,14 @@
 class VisitantesController < ApplicationController
+
+#  skip_before_action :verify_authenticity_token  # avoid CSRF - 422 (Unprocessable Entity)
+# protect_from_forgery unless: -> { request.format.json? }
+
   before_action :set_visitante, only: [:show, :update, :destroy]
 
   # GET /visitantes
   def index
-#    @visitantes = Visitante.all
 
-#    @visitantes = Visitante.joins(:visitas).where('visitas.salida is NOT null') rescue nil
+    # @visitantes = Visitante.joins(:visitas).where('visitas.salida is NOT null') rescue nil
     @visitantes = Visitante.where("id NOT IN(select visitante_id from visitas where salida is null)");
 
     render json: @visitantes
@@ -59,39 +62,6 @@ class VisitantesController < ApplicationController
   end
   #render :json => @todo.attributes.merge({list: { "completion_percentage" => 63 }})
 
-
-=begin
-  def adentro
-    # visitantes = Visitante.joins(:visitas).where('visitas.salida is not null') rescue nil # regresa los que tienen al menos UN NO nulo
-    # visitantes = Visitante.joins(:visitas).where('visitas.salida is null') rescue nil # regresa los que tienen al menos UN SI nulo
-
-    #render :json =>  Visitante.joins(:visitas).where("visitas.id >3").to_json(:include => {:visitas => {:include => :empleado} })
-
-    # render :json => visitantes.to_json(:include => {:visitas => {:include => :empleado} })
-
-   # visitantes = Visitante.joins(:visita).where('visitas.salida is null').references(:visitas)
-
-    # visitantes = Visitante.joins(:visitas).where(visitas: {id: 5})
-#    visitantes = Visitante.(:visitas).where('visitas.salida is null').references(:visitas)
-
-    #visitantes = Visitante.joins("INNER JOIN visitas ON visitas.visitante_id = visitantes.id").where('visitas.salida is null')
-
-    #render :json => visitantes.to_json(:include => {:visitas => {:include => :empleado} })
-
-
-    visitantes = Visitante.joins("INNER JOIN visitas ON visitas.visitante_id = visitantes.id").where('visitas.salida is null')
-
-
-    visitantes = Visitante.select('*').joins(:visitas).where('visitas.salida is null')
-
-    render :json => visitantes.to_json
-
-
-
-    #render :json => visitantes.to_json(:include => {:visitas => {:include => :empleado} })
-
-  end
-=end
 
   # POST /visitantes
   def create

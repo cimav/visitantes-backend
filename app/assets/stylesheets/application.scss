@@ -1,0 +1,39 @@
+@import "materialize";
+@import "materialize/extras/nouislider";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+#img-logo {
+  margin-left: 10px;
+  border-radius: 31px/21px;
+  padding: 2px;
+  background-color: white;
+}
+#titulo-header {
+  padding-left: 5px;
+  font-size: large;
+}
+.forma-filtro {
+  marginx: 10px;
+}
+
+#grid_visitas {
+  margin: 0 10px;
+}
+
+#grid-basic {
+  border: 2px solid #ee6e73;
+}
+
+#row-btns{
+  padding-bottom: 10px;
+}

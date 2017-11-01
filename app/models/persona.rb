@@ -1,5 +1,7 @@
 class Persona < NetmultixRecord
 
+  self.table_name = "#{self.connection.current_database}.personas"
+
 =begin
  self.primary_key = 'clave'
 

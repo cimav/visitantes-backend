@@ -2,8 +2,13 @@ class Visitante < ApplicationRecord
 
   has_many :visitas
 
+  attr_accessor :nombre_completo
+
   mount_base64_uploader :avatar, AvatarUploader
 
+  def nombre_completo
+    self.nombre + ' ' + self.apellido
+  end
 
   def convert_from_base64(image_data)
     data = StringIO.new(Base64.decode64(image_data))
