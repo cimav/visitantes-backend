@@ -6,6 +6,7 @@ class VisitantesController < ApplicationController
   before_action :set_visitante, only: [:show, :update, :destroy]
 
   # GET /visitantes
+  # GET /visitantes.json
   def index
 
     # @visitantes = Visitante.joins(:visitas).where('visitas.salida is NOT null') rescue nil
@@ -43,7 +44,13 @@ class VisitantesController < ApplicationController
   # GET /visitantes/1
   def show
     #render :json => @visitante.to_json(:include => :visitas)
-    render json: @visitante
+    @visitantes = Visitante.find(params[:id]);
+    render @visitante
+  end
+
+  def edit
+    @visitantes = Visitante.find(params[:id]);
+    render @visitante
   end
 
   def last
@@ -62,8 +69,16 @@ class VisitantesController < ApplicationController
   end
   #render :json => @todo.attributes.merge({list: { "completion_percentage" => 63 }})
 
+  # GET /visitantes/new
+  def new
+    @visitante = Visitante.new
+  end
+  # GET /visitantes/1/edit
+  def edit
+  end
 
   # POST /visitantes
+  # POST /visitantes.json
   def create
   #  image_data = JSON.parse(params[:json])['visita']['avatar']
   #  params[:visita][:avatar] = @visita.convert_from_base64(image_data)
@@ -77,20 +92,56 @@ class VisitantesController < ApplicationController
     else
       render json: @visitante.errors, status: :unprocessable_entity
     end
+
+=begin
+    respond_to do |format|
+      if @visitante.save
+        format.html { redirect_to @visitante, notice: 'Visitante was successfully created.' }
+        format.json { render :show, status: :created, location: @visitante }
+      else
+        format.html { render :new }
+        format.json { render json: @visitante.errors, status: :unprocessable_entity }
+      end
+    end
+=end
+
   end
 
   # PATCH/PUT /visitantes/1
+  # PATCH/PUT /visitantes/1.json
   def update
     if @visitante.update(visita_params)
       render json: @visitante
     else
       render json: @visitante.errors, status: :unprocessable_entity
     end
+
+=begin
+    respond_to do |format|
+      if @visitante.update(visitante_params)
+        format.html { redirect_to @visitante, notice: 'Visitante was successfully updated.' }
+        format.json { render :show, status: :ok, location: @visitante }
+      else
+        format.html { render :edit }
+        format.json { render json: @visitante.errors, status: :unprocessable_entity }
+      end
+    end
+=end
+
   end
 
   # DELETE /visitantes/1
+  # DELETE /visitantes/1.json
   def destroy
     @visitante.destroy
+
+=begin
+    respond_to do |format|
+      format.html { redirect_to visitantes_url, notice: 'Visitante was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+=end
+
   end
 
   def count

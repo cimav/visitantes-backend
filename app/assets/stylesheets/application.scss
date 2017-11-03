@@ -37,3 +37,10 @@ main {
 #row-btns{
   padding-bottom: 10px;
 }
+
+#visitante-div i  {
+  display:none;
+}
+#visitante-div:hover i  {
+  display:inline;
+}

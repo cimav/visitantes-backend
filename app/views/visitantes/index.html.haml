@@ -1,0 +1,92 @@
+
+%form.col.s12.forma-filtro
+  :css
+      border: 3px solid green;
+  %div.row
+    %div.input-field.col.s3
+      %i.material-icons.prefix search
+      %input#busqueda_field.validate{:type=>"text", :onkeyup=>"buscar(); return false;"}
+      %label{:for=>"busqueda_field"} Buscar
+    %div.input-field.col.s3
+      %i.material-icons.prefix date_range
+      %input#fecha_inicial.datepicker
+      %label{:for=>"fecha_inicial"} Inicio
+    %div.input-field.col.s3
+      %i.material-icons.prefix date_range
+      %input#fecha_final.datepicker
+      %label{:for=>"fecha_final"} Fin
+  %button.btn.waves-effect.waves-light
+    %i.material-icons.right send
+
+%table#grid-basic.table.table-condensed.table-hover.table-striped
+  %thead
+    %tr
+      %th{:'data-column-id'=>"id", :'data-type'=>"numeric"} ID
+      %th{:'data-column-id'=>"apellido", :'data-type'=>"string", :data-order=>"desc"} Apellido
+      %th{:'data-column-id'=>"nombre", :'data-type'=>"string"} Nombre
+      %th{:'data-column-id'=>"created_at", :'data-type'=>"date"} Created
+  %tbody
+    -@visitantes.each do |visitante|
+      %tr
+        %td
+          =visitante.id
+        %td
+          =visitante.nombre
+        %td
+          =visitante.apellido
+        %td
+          =visitante.created_at
+
+:javascript
+     $(document).ready(function() {
+        $('.datepicker').pickadate({
+          default: 'now',
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15, // Creates a dropdown of 15 years to control year,
+          today: 'Hoy',
+          clear: 'Cancelar',
+          close: 'Ok',
+          closeOnSelect: false, // Close upon selecting a date,
+        });
+
+        var fechaInicial = $('#fecha_inicial').pickadate('picker');
+        fechaInicial.on({
+          set: function(thingSet) {
+            console.log('Set inicial:', thingSet.select, new Date(thingSet.select))
+          }
+        });
+        var fechaFinal = $('#fecha_final').pickadate('picker');
+        fechaFinal.on({
+          set: function(thingSet) {
+            console.log('Set final:', thingSet.select, new Date(thingSet.select))
+          }
+        });
+
+     });
+
+    $("#grid-basic").css('border', '3px solid red');
+    $("#grid-basic").bootgrid({
+      navigation: 2,
+      caseSensitive: false,
+      labels: {
+        all: "Todos",
+        infos: "Mostrando del {{ctx.start}} al {{ctx.end}} de {{ctx.total}} registros",
+        loading: "Cargando...",
+        noResults: "No hay resultados",
+        refresh: "Recargar",
+        search: "Buscar"
+      },
+      searchSettings: {
+        delay: 100,
+        characters: 3
+      }
+    });
+    //$("#grid-basic").bootgrid("search", "Cafe");
+
+    function buscar() {
+      var txt = document.getElementById("busqueda_field").value;
+      $('#grid-basic').bootgrid('search', txt);
+    };
+
+
+
