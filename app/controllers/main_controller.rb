@@ -4,6 +4,7 @@ class MainController < ApplicationController
   end
 
   def grid
+
     inicial = DateTime.parse(params[:inicial]).beginning_of_day rescue nil
     final = DateTime.parse(params[:final]).end_of_day rescue nil
     apellido = params[:apellido] if params[:apellido].present? rescue nil
@@ -50,6 +51,9 @@ class MainController < ApplicationController
       }
     end
 
+    render layout: false
+
   end
+
 
 end

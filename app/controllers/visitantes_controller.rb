@@ -44,13 +44,13 @@ class VisitantesController < ApplicationController
   # GET /visitantes/1
   def show
     #render :json => @visitante.to_json(:include => :visitas)
-    @visitantes = Visitante.find(params[:id]);
+    @visitante = Visitante.find(params[:id])
     render @visitante
   end
 
+  # GET /visitantes/1/edit
   def edit
-    @visitantes = Visitante.find(params[:id]);
-    render @visitante
+    @visitante = Visitante.find(params[:id]) rescue nil
   end
 
   def last
@@ -73,9 +73,6 @@ class VisitantesController < ApplicationController
   def new
     @visitante = Visitante.new
   end
-  # GET /visitantes/1/edit
-  def edit
-  end
 
   # POST /visitantes
   # POST /visitantes.json
@@ -83,7 +80,7 @@ class VisitantesController < ApplicationController
   #  image_data = JSON.parse(params[:json])['visita']['avatar']
   #  params[:visita][:avatar] = @visita.convert_from_base64(image_data)
 
-    @visitante = Visitante.new(visita_params)
+    @visitante = Visitante.new(visitante_params)
 
   #  @visita.avatar= Base64.encode64(File.read('public/1.jpg'));
 
@@ -110,23 +107,24 @@ class VisitantesController < ApplicationController
   # PATCH/PUT /visitantes/1
   # PATCH/PUT /visitantes/1.json
   def update
-    if @visitante.update(visita_params)
+
+=begin
+    if @visitante.update(params[:visitante])
       render json: @visitante
     else
       render json: @visitante.errors, status: :unprocessable_entity
     end
+=end
 
-=begin
     respond_to do |format|
       if @visitante.update(visitante_params)
-        format.html { redirect_to @visitante, notice: 'Visitante was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Visitante was successfully updated.' }
         format.json { render :show, status: :ok, location: @visitante }
       else
         format.html { render :edit }
         format.json { render json: @visitante.errors, status: :unprocessable_entity }
       end
     end
-=end
 
   end
 
@@ -156,7 +154,7 @@ class VisitantesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def visita_params
-      params.require(:visitante).permit(:rfc, :apellido, :nombre, :avatar, :nota, :persona, :tipo)
+    def visitante_params
+      params.require(:visitante).permit(:rfc, :apellido, :nombre, :avatar, :empresa, :nota, :tipo, :persona)
     end
 end

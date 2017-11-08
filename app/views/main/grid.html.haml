@@ -1,5 +1,5 @@
 
-%div#modal-holder
+%h1 TheGrid
 
 %table#grid-basic.table.table-condensed.table-hover.table-striped
   %thead
@@ -29,63 +29,9 @@
         %td
           None
 
-  :javascript
+:javascript
 
-    $(document).ready(function() {
-
-      $('.fechas').unbind().change(function(event) {
-        filtrar(event, false);
-      });
-
-      $('#btnFiltrar').unbind().click(function(event) {
-        filtrar(event, false);
-      });
-
-      $('#btnExcel').unbind().click(function(event) {
-        filtrar(event, true);
-      });
-
-    });
-
-      function filtrar(event, isExcel){
-
-        var inicial = $('#inicial').val();
-        var final = $('#final').val();
-
-        inicial = inicial.trim().length <=0 ? "nil" : inicial;
-        final = final.trim().length <=0 ? "nil" : final;
-
-        var apellido = $('#apellido').val().trim();
-        var empresa = $('#empresa').val().trim();
-        var persona = $('#persona').val().trim();
-
-        if (!apellido || 0 === apellido.length) {
-          apellido = null;
-        }
-        if (!empresa || 0 === empresa.length) {
-          empresa = null;
-        }
-        if (!persona || 0 === persona.length) {
-          persona = null;
-        }
-
-        var url = "main/grid/" + inicial + "/" + final + "/" + apellido + "/" + empresa + "/"  + persona;
-
-        if (isExcel) {
-          url = url + '.xlsx';
-          window.open(url, "_self");
-        } else {
-          $.ajax({
-            url: url,
-            success: function(result){
-              $("#grid_visitas").html(result);
-            },
-            error: function (jqXHR, exception) {
-              $("#grid_visitas").html("<h3>Error en el servidor. Intente recargando.</h3>");
-            }
-          });
-        }
-      };
+  $(document).ready(function() {
 
     var gridBasic = $("#grid-basic").bootgrid({
       navigation: 2,
@@ -105,13 +51,13 @@
       },
       formatters: {
         fecha: function (column, row) {
-            return row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
+          return row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
         },
         link: function(column, row) {
-           return "<div id='visitante-div'><a style='color: black;' href='visitantes/:" + row.id + "/edit'><i class='material-icons' style='font-size: larger;'>edit</i>" + row.visitante + "</a></div>";
+          return "<div id='visitante-div'><a style='color: black;' href='visitantes/" + row.id + "/edit'><i class='material-icons' style='font-size: larger;'>edit</i>" + row.visitante + "</a></div>";
         },
         commands: function(column, row) {
-              return "<a style='color: black;' href='#!'><i  class='material-icons' style='font-size: larger;'>edit</i></a>";
+          return "<a style='color: black;' href='#!'><i  class='material-icons' style='font-size: larger;'>edit</i></a>";
         }
       }
     }).on("loaded.rs.jquery.bootgrid", function() {
@@ -123,4 +69,4 @@
       });
     });
 
-
+  });
