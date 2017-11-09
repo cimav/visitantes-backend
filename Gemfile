@@ -57,10 +57,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
-
++6
 gem 'jquery-rails'
 gem 'haml'
 gem 'materialize-sass'
 
 # Export data to spreadsheets
 gem 'axlsx_rails'
+
+group :production do
+  gem 'therubyracer', :platform => :ruby
+end
