@@ -20,7 +20,8 @@ class MainController < ApplicationController
 
 
     if apellido
-      conditions << '(visitantes.apellido like ?)'
+      #conditions << '(visitantes.apellido like ?)'
+      conditions << '(   concat(visitantes.apellido, visitantes.nombre)    like ?)'
       values <<  "%#{apellido.strip}%"
     end
     if empresa

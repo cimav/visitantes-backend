@@ -1,6 +1,4 @@
 
-%h1 TheForm
-
 %form.col.s12.forma-filtro
   %div.row
     %div.input-field.col.s3
@@ -28,10 +26,10 @@
       %label{:for=>"fecha_final"} Fin
   %div#row-btns.right-align
     -# %input( type="button" id="btnFiltrar3" value=" Filtrar " )
-    %button#btnFiltrar.btn.btn-default.waves-effect.waves-light{type: "button"}
+    %button#btnFiltrar.btn.btn-default.waves-effect.waves-light.red{type: "button"}
       Filtrar
       %i.material-icons.right filter_list
-    %button#btnExcel.btn.btn-default.waves-effect.waves-light{type: "button"}
+    %button#btnExcel.btn.btn-default.waves-effect.waves-light.red{type: "button"}
       Excel
       %i.material-icons.right file_download
 
@@ -51,7 +49,7 @@
       if(val.length >= 3 || event.keyCode ==13)  {
         setTimeout(function() {
           filtrar(false);
-        }, 300);
+        }, 600);
       }
     });
 
@@ -99,9 +97,17 @@
         url = url + '.xlsx';
         window.open(url, "_self");
       } else {
+
         $.ajax({
           url: url,
+          beforeSend: function() {
+            $('#grid-progress-tipo').toggleClass('determinate indeterminate');
+          },
+          complete: function() {
+            $('#grid-progress-tipo').toggleClass('indeterminate determinate');
+          },
           success: function(result){
+
             $("#grid_visitas").html(result);
           },
           error: function (jqXHR, exception) {
