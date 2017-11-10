@@ -5,15 +5,15 @@
   %div.row
     %div.input-field.col.s3
       %i.material-icons.prefix directions_walk
-      %input#apellido.validate{:type=>"text"}
+      %input#apellido.textos.validate{:type=>"text"}
       %label{:for=>"apellido"} Apellido visitante
     %div.input-field.col.s3
       %i.material-icons.prefix business
-      %input#empresa.validate{:type=>"text"}
+      %input#empresa.textos.validate{:type=>"text"}
       %label{:for=>"empresa"} Empresa visitante
     %div.input-field.col.s3
       %i.material-icons.prefix portrait
-      %input#persona.validate{:type=>"text"}
+      %input#persona.textos.validate{:type=>"text"}
       %label{:for=>"persona"} Persona a quien visita
   %div.row
     %div.input-field.col.s3
@@ -41,49 +41,26 @@
 
 :javascript
 
-  /*
-  $(document).ready(function() {
-
-    var today = moment().format('YYYY-MM-DD');
-    document.getElementById("inicial").defaultValue = today;
-    document.getElementById("final").defaultValue = today;
-
-    // TODO cookies
-    var apellido = null;
-    var empresa = null;
-    var persona = null;
-
-    // al cargar, carga hoy
-    var hoy = moment().format('YYYY-MM-DD');
-    var url = "main/grid/" + hoy + "/" + hoy + "/" + apellido + "/" + empresa + "/" + persona + ".html";
-
-    console.log('url> ', url);
-
-    $.ajax({
-      url: url,
-      success: function(result){
-        console.log('result> ', result);
-        $("#grid_visitas").html(result);
-      },
-      error: function (jqXHR, exception) {
-        $("#grid_visitas").html("<h3>Error en el servidor. Al cargar.</h3>");
-      }
-     });
-  });
-  */
-
   $(document).ready(function() {
 
     $('.fechas').unbind().change(function(event) {
-      filtrar(event, false);
+      filtrar(false);
+    });
+    $('.textos').unbind().bind("keyup", function(event){
+      var val = this.value.trim();
+      if(val.length >= 3 || event.keyCode ==13)  {
+        setTimeout(function() {
+          filtrar(false);
+        }, 300);
+      }
     });
 
     $('#btnFiltrar').unbind().click(function(event) {
-      filtrar(event, false);
+      filtrar(false);
     });
 
     $('#btnExcel').unbind().click(function(event) {
-      filtrar(event, true);
+      filtrar(true);
     });
 
     /* Al cargarse, por default filtrar Hoy */
@@ -94,7 +71,7 @@
 
   });
 
-    function filtrar(event, isExcel){
+    function filtrar(isExcel){
 
       var inicial = $('#inicial').val();
       var final = $('#final').val();
