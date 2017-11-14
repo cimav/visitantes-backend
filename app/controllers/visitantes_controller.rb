@@ -44,12 +44,15 @@ class VisitantesController < ApplicationController
   # GET /visitantes/1
   def show
     #render :json => @visitante.to_json(:include => :visitas)
+
     @visitante = Visitante.find(params[:id])
     render @visitante
   end
 
   # GET /visitantes/1/edit
   def edit
+    @tipos= [['cero', 0],['uno', 1],['dos', 2],['tres', 3],['cuatro', 4],['cinco', 5],['sies', 6],['siete', 7]]
+
     @visitante = Visitante.find(params[:id]) rescue nil
   end
 

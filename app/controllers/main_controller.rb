@@ -38,9 +38,8 @@ class MainController < ApplicationController
       values <<  final
     end
 
-
-    puts conditions.join(' AND ')
-    puts *values
+    # puts conditions.join(' AND ')
+    # puts *values
 
     @registros = Visita.includes(:visitante, :persona).where(conditions.join(' AND '), *values).references(:visitantes, :personas)
 

@@ -19,7 +19,43 @@
 
 =form_for @visitante do |f|
   .form-group
+    =f.label :apellido
+    =f.text_field :apellido, {class: "form-control"}
+  .form-group
+    =f.label :nombre
+    =f.text_field :nombre, {class: "form-control"}
+  .form-group
     =f.label :empresa
     =f.text_field :empresa, {class: "form-control"}
+  .form-group
+    =f.label :tipo_copy
+    =f.text_field :tipo, {class: "form-control"}
+  .form-group
+    = f.label :tipo
+    -# = f.select(:tipo, List.items(foo))
+    %div.input-field
+      =f.select :tipo, @tipos, :id
+  .form-group
+    =f.label :nota
+    =f.text_area :nota, {class: "form-control"}
   =f.submit "Guardar", class: "btn btn-default"
 
+
+  -# = f.select(:manufacturer_id, options_from_collection_for_select(VehicleManufacturer.all, :id, :name, @object.manufacturer_id ), {}, required: true, id: "manufacturer-select")
+
+  -#
+    public tipos:TipoVisita[] = [
+      new TipoVisita(0, 'Visitante'),
+      new TipoVisita(1, 'Estudiante'),
+      new TipoVisita(2, 'Proveedor'),
+      new TipoVisita(3, 'Contratista'),
+      new TipoVisita(4, 'Sub-contratista'),
+      new TipoVisita(5, 'Ex-empleado'),
+      new TipoVisita(6, 'Familiar'),
+      new TipoVisita(7, 'Otro')
+      ];
+
+:javascript
+  $(document).ready(function() {
+    $('select').material_select();
+  });

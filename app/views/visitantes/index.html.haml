@@ -1,43 +1,47 @@
 
-%form.col.s12.forma-filtro
-  :css
-      border: 3px solid green;
-  %div.row
-    %div.input-field.col.s3
-      %i.material-icons.prefix search
-      %input#busqueda_field.validate{:type=>"text", :onkeyup=>"buscar(); return false;"}
-      %label{:for=>"busqueda_field"} Buscar
-    %div.input-field.col.s3
-      %i.material-icons.prefix date_range
-      %input#fecha_inicial.datepicker
-      %label{:for=>"fecha_inicial"} Inicio
-    %div.input-field.col.s3
-      %i.material-icons.prefix date_range
-      %input#fecha_final.datepicker
-      %label{:for=>"fecha_final"} Fin
-  %button.btn.waves-effect.waves-light
-    %i.material-icons.right send
+%h1 USADO >> visitantes/index.html.haml
 
-%table#grid-basic.table.table-condensed.table-hover.table-striped
-  %thead
-    %tr
-      %th{:'data-column-id'=>"id", :'data-type'=>"numeric"} ID
-      %th{:'data-column-id'=>"apellido", :'data-type'=>"string", :data-order=>"desc"} Apellido
-      %th{:'data-column-id'=>"nombre", :'data-type'=>"string"} Nombre
-      %th{:'data-column-id'=>"created_at", :'data-type'=>"date"} Created
-  %tbody
-    -@visitantes.each do |visitante|
+-#
+  %form.col.s12.forma-filtro
+    :css
+        border: 3px solid green;
+    %div.row
+      %div.input-field.col.s3
+        %i.material-icons.prefix search
+        %input#busqueda_field.validate{:type=>"text", :onkeyup=>"buscar(); return false;"}
+        %label{:for=>"busqueda_field"} Buscar
+      %div.input-field.col.s3
+        %i.material-icons.prefix date_range
+        %input#fecha_inicial.datepicker
+        %label{:for=>"fecha_inicial"} Inicio
+      %div.input-field.col.s3
+        %i.material-icons.prefix date_range
+        %input#fecha_final.datepicker
+        %label{:for=>"fecha_final"} Fin
+    %button.btn.waves-effect.waves-light
+      %i.material-icons.right send
+
+  %table#grid-basic.table.table-condensed.table-hover.table-striped
+    %thead
       %tr
-        %td
-          =visitante.id
-        %td
-          =visitante.nombre
-        %td
-          =visitante.apellido
-        %td
-          =visitante.created_at
+        %th{:'data-column-id'=>"id", :'data-type'=>"numeric"} ID
+        %th{:'data-column-id'=>"apellido", :'data-type'=>"string", :data-order=>"desc"} Apellido
+        %th{:'data-column-id'=>"nombre", :'data-type'=>"string"} Nombre
+        %th{:'data-column-id'=>"created_at", :'data-type'=>"date"} Created
+    %tbody
+      -@visitantes.each do |visitante|
+        %tr
+          %td
+            =visitante.id
+          %td
+            =visitante.nombre
+          %td
+            =visitante.apellido
+          %td
+            =visitante.created_at
 
 :javascript
+  /*
      $(document).ready(function() {
         $('.datepicker').pickadate({
           default: 'now',
@@ -88,5 +92,5 @@
       $('#grid-basic').bootgrid('search', txt);
     };
 
-
+  */
 

@@ -5,18 +5,18 @@
 %table#grid-basic.table.table-condensed.table-hover.table-striped
   %thead
     %tr
-      -# %th{:'data-column-id'=>"id", :'data-type'=>"numeric", 'data-visible'=>"true" } Link
-      %th{:'data-column-id'=>"visitante", :'data-type'=>"string", :'data-formatter'=>"link",} Visitante
+      %th{:'data-column-id'=>"id", :'data-type'=>"numeric", 'data-visible'=>"false"} ID
+      %th{:'data-column-id'=>"visitante", :'data-type'=>"string", :'data-formatter'=>"link_to_edit_visitante",} Visitante
       %th{:'data-column-id'=>"empresa", :'data-type'=>"string"} Empresa
-      %th{:'data-column-id'=>"entrada", :'data-type'=>"date", 'data-formatter'=>"fecha"} Entrada
-      %th{:'data-column-id'=>"salida", :'data-type'=>"date", 'data-formatter'=>"fecha"} Salida
+      %th{:'data-column-id'=>"entrada", :'data-type'=>"date", 'data-formatter'=>"fecha", 'data-header-css-class'=>"css-fechas"} Entrada
+      %th{:'data-column-id'=>"salida", :'data-type'=>"date", 'data-formatter'=>"fecha", 'data-header-css-class'=>"css-fechas"} Salida
       %th{:'data-column-id'=>"persona", :'data-type'=>"string"} Visita a
-      %th{:'data-column-id'=>"commands", :'data-formatter'=>"commands", :'data-sortable'=>"false"} Comandos
+      -# %th{:'data-column-id'=>"commands", :'data-formatter'=>"commands", :'data-sortable'=>"false"} Comandos
   %tbody
     -@registros.each do |registro|
       %tr
-        -# %td
-        -#  =registro.visitante.id rescue 0
+        %td
+          =registro.visitante.id rescue 0
         %td
           =registro.visitante.apellido + ' ' + registro.visitante.nombre rescue '--'
         %td
@@ -27,14 +27,21 @@
           =registro.salida
         %td
           =registro.persona.nombre rescue '**'
-        %td
-          None
+        -# %td
+          -# None
 
 :javascript
 
   $(document).ready(function() {
 
     var gridBasic = $("#grid-basic").bootgrid({
+      css: {
+        icon: "icon glyphicon",
+        iconColumns: "glyphicon-th-list",
+        iconDown: "glyphicon-chevron-down",
+        iconRefresh: "glyphicon-refresh",
+        iconUp: "glyphicon-chevron-up"
+      },
       navigation: 2,
       caseSensitive: false,
       rowCount: 50,
@@ -52,14 +59,15 @@
       },
       formatters: {
         fecha: function (column, row) {
-          return row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
+          var f = row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
+          return "<span>" + f + "</span>";
         },
-        link: function(column, row) {
+        link_to_edit_visitante: function(column, row) {
           return "<div id='visitante-div'><a style='color: black;' href='visitantes/" + row.id + "/edit'><i class='material-icons' style='font-size: larger;'>edit</i>" + row.visitante + "</a></div>";
-        },
+        }/* ,
         commands: function(column, row) {
           return "<a style='color: black;' href='#!'><i  class='material-icons' style='font-size: larger;'>edit</i></a>";
-        }
+        } */
       }
     }).on("loaded.rs.jquery.bootgrid", function() {
       /* Executes after data is loaded and rendered */
