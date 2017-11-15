@@ -61,10 +61,33 @@
       filtrar(true);
     });
 
-    /* Al cargarse, por default filtrar Hoy */
+    var apellido = localStorage.getItem('apellido');
+    var empresa = localStorage.getItem('empresa');
+    var persona = localStorage.getItem('persona');
+    var inicial = localStorage.getItem('inicial');
+    var final = localStorage.getItem('final');
+
+    apellido = !apellido || apellido.trim() == 'null' ? '' : apellido.trim();
+    empresa = !empresa || empresa.trim() == 'null' ? '' : empresa.trim();
+    persona = !persona || persona.trim() == 'null' ? '' : persona.trim();
     var today = moment().format('YYYY-MM-DD');
-    document.getElementById("inicial").defaultValue = today;
-    document.getElementById("final").defaultValue = today;
+    inicial = !inicial || inicial == "null" ? today : inicial;
+    final = !final || final == "null"  ? today : final;
+
+    /*
+    console.log(apellido);
+    console.log(empresa);
+    console.log(persona);
+    console.log(inicial);
+    console.log(final);
+    */
+
+    document.getElementById("apellido").defaultValue = apellido;
+    document.getElementById("empresa").defaultValue = empresa;
+    document.getElementById("persona").defaultValue = persona;
+    document.getElementById("inicial").defaultValue = inicial;
+    document.getElementById("final").defaultValue = final;
+
     filtrar(false);
 
   });
@@ -74,8 +97,8 @@
       var inicial = $('#inicial').val();
       var final = $('#final').val();
 
-      inicial = inicial.trim().length <=0 ? "nil" : inicial;
-      final = final.trim().length <=0 ? "nil" : final;
+      inicial = inicial.trim().length <=0 ? "null" : inicial;
+      final = final.trim().length <=0 ? "null" : final;
 
       var apellido = $('#apellido').val().trim();
       var empresa = $('#empresa').val().trim();
@@ -90,6 +113,12 @@
       if (!persona || 0 === persona.length) {
         persona = null;
       }
+
+      localStorage.setItem('apellido', apellido);
+      localStorage.setItem('empresa', empresa);
+      localStorage.setItem('persona', persona);
+      localStorage.setItem('inicial', inicial);
+      localStorage.setItem('final', final);
 
       var url = "main/grid/" + inicial + "/" + final + "/" + apellido + "/" + empresa + "/"  + persona;
 
@@ -107,7 +136,6 @@
             $('#grid-progress-tipo').toggleClass('indeterminate determinate');
           },
           success: function(result){
-
             $("#grid_visitas").html(result);
           },
           error: function (jqXHR, exception) {

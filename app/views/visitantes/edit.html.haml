@@ -27,9 +27,16 @@
             =f.text_area :nota, {class: "materialize-textarea"}
 
       %div.card-action
-        .row.right-align
-          .input-field
-            =f.submit "Guardar", class: "btn btn-default"
+        .row
+          %a.waves-effect.waves-light.btn{:href=>"#{root_url}"}
+            %i.material-icons.left cancel
+            Cancelar
+          -# .input-field
+            -# =f.submit "Guardar", class: "btn btn-default"
+          %button.btn.waves-effect.waves-light{:type=>"submit", :style=>"margin-left:5px;"}
+            %i.material-icons.left save
+            Guardar
+
 
 
 :javascript
