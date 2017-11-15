@@ -51,7 +51,9 @@ class VisitantesController < ApplicationController
 
   # GET /visitantes/1/edit
   def edit
-    @tipos= [['cero', 0],['uno', 1],['dos', 2],['tres', 3],['cuatro', 4],['cinco', 5],['sies', 6],['siete', 7]]
+    @tipos= [['Visitante', 0],['Estudiante', 1],['Proveedor', 2],['Contratista', 3],['Sub-contratista', 4],['Ex-empleado', 5],['Familiar', 6],['Otro', 7]]
+    # @tipos= [0,1,2,3,4,5,6,7,8,9]
+    # @tipos = [{:name => "Cero", :id => 0}, {:name => "Uno", :id => 1}, {:name => "Tres", :id => 3}]
 
     @visitante = Visitante.find(params[:id]) rescue nil
   end

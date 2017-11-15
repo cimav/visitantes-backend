@@ -57,8 +57,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
-+6
+
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'haml'
 gem 'materialize-sass'
 

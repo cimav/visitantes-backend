@@ -12,7 +12,8 @@ ActiveSupport.to_time_preserves_timezone = true
 Rails.application.config.active_record.belongs_to_required_by_default = true
 
 # Do not halt callback chains when a callback returns false. Previous versions had true.
-ActiveSupport.halt_callback_chains_on_return_false = false
+### ActiveSupport.halt_callback_chains_on_return_false = false
+### DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /home/calderas/rails/visitantes-backend/config/initializers/new_framework_defaults.rb:15)
 
 # Configure SSL options to enable HSTS with subdomains. Previous versions had false.
 #Rails.application.config.ssl_options = { hsts: { subdomains: true } }
