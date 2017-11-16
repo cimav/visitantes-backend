@@ -16,12 +16,12 @@
   %div.row
     %div.input-field.col.s3
       %i.material-icons.prefix date_range
-      %input#inicial.fechas{:type=>"text"}
-      %label{:for=>"inicial"} Inicio
+      %input#inicial.fechas{:type=>"date"}
+      -# %label{:for=>"inicial"} Inicio
     %div.input-field.col.s3
       %i.material-icons.prefix date_range
-      %label{:for=>"final"} Fin
-      %input#final.fechas{:type=>"text"}
+      -# %label{:for=>"final"} Fin
+      %input#final.fechas{:type=>"date"}
   %div#row-btns
     %div#row-btns-left
       %button#btnHoy.btn.btn-default.waves-effect.waves-light.red{type: "button"}
@@ -36,7 +36,7 @@
         %i.material-icons.right file_download
 
 %div#grid_visitas
-  %span De momento, estoy vacio
+  %span De momento, no hay registros
 
 
 :javascript
@@ -68,8 +68,8 @@
       $('#empresa').val('');
       $('#persona').val('');
       var today = moment().format('YYYY-MM-DD');
-      $('#inicial').val(today);
-      $('#final').val(today);
+      document.getElementById("inicial").defaultValue = today;
+      document.getElementById("final").defaultValue = today;
       filtrar(false);
     });
 

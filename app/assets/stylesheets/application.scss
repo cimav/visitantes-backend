@@ -34,6 +34,16 @@ main {
   border: 2px solid #ee6e73;
 }
 
+input[type=date]::-webkit-inner-spin-button {
+  /* -webkit-appearance: none;
+   display: none; */
+}
+/* quita el boton X el calendario */
+input[type=date]::-webkit-clear-button {
+  -webkit-appearance: none;
+   display: none;
+}
+
 #row-btns {
   display: inline-block;
   width: 100%;
