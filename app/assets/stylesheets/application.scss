@@ -34,10 +34,16 @@ main {
   border: 2px solid #ee6e73;
 }
 
-#row-btns{
-  padding-bottom: 10px;
+#row-btns {
+  display: inline-block;
+  width: 100%;
 }
-
+#row-btns-left {
+  float: left;
+}
+#row-btns-right{
+  float: right;
+}
 #visitante-div i  {
   display:none;
 }
