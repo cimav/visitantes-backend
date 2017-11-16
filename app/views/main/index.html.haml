@@ -16,14 +16,12 @@
   %div.row
     %div.input-field.col.s3
       %i.material-icons.prefix date_range
-      -# %input#fecha_inicial.datepicker
-      %input#inicial.fechas{:type=>"date"}
-      %label{:for=>"fecha_inicial"} Inicio
+      %input#inicial.fechas{:type=>"text"}
+      %label{:for=>"inicial"} Inicio
     %div.input-field.col.s3
       %i.material-icons.prefix date_range
-      -# %input#fecha_final.datepicker
-      %input#final.fechas{:type=>"date"}
-      %label{:for=>"fecha_final"} Fin
+      %label{:for=>"final"} Fin
+      %input#final.fechas{:type=>"text"}
   %div#row-btns.right-align
     -# %input( type="button" id="btnFiltrar3" value=" Filtrar " )
     %button#btnFiltrar.btn.btn-default.waves-effect.waves-light.red{type: "button"}
