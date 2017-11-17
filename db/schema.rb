@@ -10,80 +10,87 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828183432) do
+ActiveRecord::Schema.define(version: 20171117230037) do
 
-  create_table "categorias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "categoria"
+  create_table "categorias", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "categoria"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "documentos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "file"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "categoria_id"
-    t.integer  "proveedor_id"
-    t.string   "attachment"
-    t.string   "orden_compra"
-    t.index ["categoria_id"], name: "index_documentos_on_categoria_id", using: :btree
-    t.index ["proveedor_id"], name: "index_documentos_on_proveedor_id", using: :btree
+  create_table "documentos", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "categoria_id"
+    t.integer "proveedor_id"
+    t.string "attachment"
+    t.string "orden_compra"
+    t.index ["categoria_id"], name: "index_documentos_on_categoria_id"
+    t.index ["proveedor_id"], name: "index_documentos_on_proveedor_id"
   end
 
-  create_table "empleados", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "empleados", id: :integer, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "nombre"
   end
 
-  create_table "pets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name"
-    t.text     "description", limit: 65535
-    t.string   "image"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "proveedores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "rfc"
-    t.string   "password"
-    t.string   "razon_social"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "password_digest"
-    t.string   "email"
-  end
-
-  create_table "resumes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name"
-    t.string   "file"
+  create_table "pets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.text "description"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "code"
   end
 
-  create_table "visitantes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "rfc"
-    t.string   "apellido"
-    t.string   "nombre"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "avatar"
-    t.string   "empresa"
-    t.text     "nota",       limit: 65535
-    t.integer  "tipo"
+  create_table "proveedores", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "rfc"
+    t.string "password"
+    t.string "razon_social"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "email"
   end
 
-  create_table "visitas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "resumes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "code"
+  end
+
+  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "usuario"
+    t.string "email"
+    t.string "token"
+    t.integer "sede", default: 1
+  end
+
+  create_table "visitantes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "rfc"
+    t.string "apellido"
+    t.string "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "avatar"
+    t.string "empresa"
+    t.text "nota"
+    t.integer "tipo"
+  end
+
+  create_table "visitas", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "entrada"
     t.datetime "salida"
-    t.text     "nota",         limit: 65535
-    t.integer  "visitante_id"
-    t.integer  "persona_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "gafete"
-    t.integer  "sede"
-    t.index ["persona_id"], name: "index_visitas_on_persona_id", using: :btree
-    t.index ["visitante_id"], name: "index_visitas_on_visitante_id", using: :btree
+    t.text "nota"
+    t.integer "visitante_id"
+    t.integer "persona_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "gafete"
+    t.integer "sede"
+    t.index ["persona_id"], name: "index_visitas_on_persona_id"
+    t.index ["visitante_id"], name: "index_visitas_on_visitante_id"
   end
 
 end

@@ -1,0 +1,8 @@
+#login-area
+  .login-title= "Servicios Generales"
+  .login-message= "Administración de Visitantes"
+  .login-methods
+    #login-google-apps.login-method
+      %button.btn{'onclick' => "window.location = '/auth/google_oauth2';"}
+        = "Accede con tu cuenta @cimav.edu.mx"
+  .clearfix

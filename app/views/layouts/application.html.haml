@@ -30,14 +30,15 @@
             %span#titulo-header Administración de visitas
             %ul.right
               %li
-                %a{:href=>"#", :title=>"Salir de la aplicación"} Logout
+                %a{:href=>"/logout", :title=>"Salir de la aplicación"} Salir
 
     %main
 
       = yield
 
     %footer.page-footer
-      %div.footer-copyright
-        %div.container © 2017 Copyright
+      %div.footer-log
+        %div.container
+          =current_user.usuario
 
 

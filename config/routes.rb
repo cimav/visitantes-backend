@@ -16,5 +16,18 @@ Rails.application.routes.draw do
   get 'main/grid/:inicial/:final/:apellido/:empresa/:persona', to: 'main#grid'
 
   root to: 'main#index'
+  #root :to => 'home#index'
+
+  match '/auth/:provider/callback' => 'sessions#create', via: [:get, :post]
+  match '/auth/failure' => 'sessions#failure', via: [:get, :post]
+  match "/logout" => 'sessions#destroy', via: [:get, :post]
+  match '/login' => 'login#index', via: [:get, :post]
+
+=begin
+  get 'login' => 'login#index'
+  get '/auth/:provider/callback' => 'sessions#create'
+  get '/auth/failure' => 'sessions#failure'
+  get '/logout' => 'sessions#destroy'
+=end
 
 end
