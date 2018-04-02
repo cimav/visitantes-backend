@@ -59,7 +59,9 @@
       },
       formatters: {
         fecha: function (column, row) {
-          var f = row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
+          //var f = row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
+          var f = row[column.id].length < 10 ? ' ' :  moment(row[column.id], "YYYY-MM-DD").format("ddd DD MMM YYYY");
+          //var f = row[column.id].length < 10 ? ' ' : row[column.id];
           return "<span>" + f + "</span>";
         }/*,
         link_to_edit_visitante: function(column, row) {

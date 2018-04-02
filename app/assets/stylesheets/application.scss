@@ -2,6 +2,8 @@
 @import "materialize/extras/nouislider";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
+@import "login";
+
 body {
   display: flex;
   min-height: 100vh;
@@ -83,4 +85,8 @@ input[type=date]::-webkit-clear-button {
 }
 .right-editar {
   width: 100%;
+}
+
+button {
+  white-space: inherit !important;
 }
