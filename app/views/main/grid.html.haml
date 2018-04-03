@@ -5,7 +5,8 @@
 %table#grid-basic.table.table-condensed.table-hover.table-striped
   %thead
     %tr
-      %th{:'data-column-id'=>"id", :'data-type'=>"numeric", 'data-visible'=>"false"} ID
+      %th{:'data-column-id'=>"visitante_id", :'data-type'=>"numeric", 'data-visible'=>"false"} ID
+      %th{:'data-column-id'=>"visita_id", :'data-formatter'=>"pix_avatar", 'data-header-css-class'=>"css-avatar"} Foto
       %th{:'data-column-id'=>"visitante", :'data-type'=>"string"} Visitante
       %th{:'data-column-id'=>"empresa", :'data-type'=>"string"} Empresa
       %th{:'data-column-id'=>"entrada", :'data-type'=>"date", 'data-formatter'=>"fecha", 'data-header-css-class'=>"css-fechas"} Entrada
@@ -17,6 +18,9 @@
       %tr
         %td
           =registro.visitante.id rescue 0
+          -# http://localhost:3001/visitantes/avatar/1778
+        %td
+          =registro.id rescue 0
         %td
           =registro.visitante.apellido + ' ' + registro.visitante.nombre rescue '--'
         %td
@@ -28,7 +32,6 @@
         %td
           =registro.persona.nombre rescue '**'
         %td
-          None
 
 :javascript
 
@@ -59,17 +62,25 @@
       },
       formatters: {
         fecha: function (column, row) {
-          //var f = row[column.id].length < 10 ? ' ' : moment.utc(row[column.id]).format('DD-MM-YYYY HH:mm');
-          var f = row[column.id].length < 10 ? ' ' :  moment(row[column.id], "YYYY-MM-DD").format("ddd DD MMM YYYY");
-          //var f = row[column.id].length < 10 ? ' ' : row[column.id];
+          var f = row[column.id].length < 10 ? ' ' :  moment.utc(row[column.id], "YYYY-MM-DD HH:mm").local().format("ddd DD MMM YYYY HH:mm"); // 2018-04-03 15:05:23 UTC
           return "<span>" + f + "</span>";
         }/*,
         link_to_edit_visitante: function(column, row) {
           return "<div id='visitante-div'><a style='color: black;' href='visitantes/" + row.id + "/edit'><i class='material-icons' style='font-size: larger;'>edit</i>" + row.visitante + "</a></div>";
         }*/,
         acciones: function(column, row) {
-          return "<a style='color: black;' href='visitantes/" + row.id + "/edit'><i class='material-icons' style='font-size: larger;'>edit</i></a>";
+          var html = "<a class='btn-floating tooltipped' data-tooltip='Editar visitante' data-position='bottom' style='color: black; width: 36px; height: 36px;' href='visitantes/" + row.visitante_id + "/edit'><i class='material-icons' style='font-size: larger;'>person</i></a>";
+            //+ "<a class='btn-floating' title='Eliminar entrada' onclick=\"return confirm('¿Esta seguro de eliminar la entrada?');\" style='color: black; width: 36px; height: 36px;' href='visitas/delete/" + row.visita_id + "' ><i class='material-icons' style='font-size: larger;'>delete</i></a>"
+
+          //  <a href="url_to_delete" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+          return html;
+        },
+        pix_avatar: function (column, row) {
+          // http://localhost:3001/visitantes/avatar/1778
+          var url = "<img class='avatar' src='visitantes/avatar/" + row.visitante_id + "'/>";
+          return url;
         }
+
       }
     }).on("loaded.rs.jquery.bootgrid", function() {
       /* Executes after data is loaded and rendered */

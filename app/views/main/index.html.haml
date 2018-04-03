@@ -16,7 +16,7 @@
   %div.row
     %div.input-field.col.s3
       %i.material-icons.prefix date_range
-      %input#inicial.fechas{:type=>"date", :placeholder=>"DD-MMM-YYYY"}
+      %input#inicial.fechas{:type=>"date"}
       -# %label{:for=>"inicial"} Inicio
     %div.input-field.col.s3
       %i.material-icons.prefix date_range
@@ -39,6 +39,14 @@
 
 %div#grid_visitas
   %span De momento, no hay registros
+
+-#
+  %div#modal1.modal
+    %div.modal-content
+      %h4 Modal Header
+      %p A bunch of text
+    %div.modal-footer
+      %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:'href'=>"#!"}
 
 
 :javascript
@@ -75,7 +83,6 @@
       var today = moment().format('YYYY-MM-DD');
       document.getElementById("inicial").value = today;
       document.getElementById("final").value = today;
-      console.log(today);
       filtrar(false);
     });
 
@@ -166,7 +173,6 @@
     };
 
     $("input#inicial.fechas").on("change", function() {
-      console.log(this.value);
       this.setAttribute( "data-date", moment(this.value, "YYYY-MM-DD").format("DD MMM YYYY"));
     }).trigger("change");
 

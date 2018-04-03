@@ -55,6 +55,14 @@ class VisitasController < ApplicationController
     end
   end
 
+=begin
+  # elimninar usando GET
+  def delete
+    visita = Visita.find(params[:id]) rescue nil
+    visita.destroy
+  end
+=end
+
   # DELETE /visitas/1
   def destroy
     @visita.destroy
@@ -68,6 +76,6 @@ class VisitasController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def visita_params
-    params.require(:visita).permit(:entrada, :salida, :visitante_id, :persona_id, :nota, :gafete, :sede)
+    params.require(:visita).permit(:id, :entrada, :salida, :visitante_id, :persona_id, :nota, :gafete, :sede)
   end
 end

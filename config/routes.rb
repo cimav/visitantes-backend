@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
 =end
 
+  # get '/visitas/delete/:id', to: 'visitas#delete'
+
 end
