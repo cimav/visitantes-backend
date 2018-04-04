@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :main
 
   get '/visitantes/avatar/:id', to: 'visitantes#avatar'
+  get '/visitantes/thumb/:id', to: 'visitantes#thumb'
   get '/visitas_adentro/:sede', to: 'visitas#adentro'
   get '/count', to: 'visitantes#count'
   get '/visitantes/last/:id', to: 'visitantes#last'

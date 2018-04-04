@@ -72,3 +72,5 @@ end
 
 gem 'omniauth-google-oauth2' #, '0.2.6'
 gem 'omniauth-oauth2' #, '~> 1.3.1'
+
+gem 'mini_magick'

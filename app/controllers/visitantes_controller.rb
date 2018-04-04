@@ -20,7 +20,15 @@ class VisitantesController < ApplicationController
 
   def avatar
     send_file "public/avatars/#{params[:id]}/avatar.png" , type: 'image/jpg', disposition: 'inline' rescue send_file "public/not_found.jpg" , type: 'image/jpg', disposition: 'inline'
-    #render text:'Holax'
+  end
+
+  def thumb
+    begin
+      send_file "public/avatars/#{params[:id]}/thumb_avatar.png" , type: 'image/jpg', disposition: 'inline'
+    rescue => ex
+      # si no hay thumb, llama al avatar
+      avatar
+    end
   end
 
   def subir
