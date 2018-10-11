@@ -28,5 +28,8 @@ ActiveSupport::Inflector.inflections do |inflect|
 
   inflect.irregular 'persona', 'personas'
 
+  inflect.irregular 'visit', 'visits'
+  inflect.irregular 'visit_people', 'visits_people'
+
 
 end

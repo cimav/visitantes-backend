@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :visitas
   resources :personas
   resources :main
+  resources :visits
+  resources :visits_people
 
   get '/visitantes/avatar/:id', to: 'visitantes#avatar'
   get '/visitantes/thumb/:id', to: 'visitantes#thumb'
@@ -32,5 +34,7 @@ Rails.application.routes.draw do
 =end
 
   # get '/visitas/delete/:id', to: 'visitas#delete'
+  # put '/visits_people/:id', to: 'visits_people#update'
+  match '/visits_people/:id' => 'visits_people#update', via: [:put]
 
 end

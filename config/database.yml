@@ -16,13 +16,23 @@ production:
   host: 10.0.0.13
   database: visitantes
 
+#development_cimavnetmultix:
+#  adapter: mysql2
+#  encoding: utf8
+#  pool: 5
+#  username: root
+#  socket: /tmp/mysql.sock
+#  database: cimavnetmultix_development
+
 development_cimavnetmultix:
   adapter: mysql2
+  host: 10.0.0.13
   encoding: utf8
   pool: 5
-  username: root
+  username: netmultix
+  password: <%= ENV['CIMAVNETMULTIX_DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
-  database: cimavnetmultix_development
+  database: cimavnetmultix
 
 production_cimavnetmultix:
   adapter: mysql2
@@ -30,7 +40,26 @@ production_cimavnetmultix:
   encoding: utf8
   pool: 5
   username: netmultix
-  password: N3tMult1x@CIMAV
+  password: <%= ENV['CIMAVNETMULTIX_DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
   database: cimavnetmultix
 
+visitas_programadas_production:
+  adapter: mysql2
+  host:  fermi.cimav.edu.mx
+  encoding: utf8
+  pool: 5
+  username: admin
+  password: <%= ENV['VISITAS_PRODUCTION_PASSWORD'] %>
+  socket: /tmp/mysql.sock
+  database: visitas_development
+
+visitas_programadas_development:
+  adapter: mysql2
+  host:  10.0.3.234
+  encoding: utf8
+  pool: 5
+  username: calderon
+  password: <%= ENV['VISITAS_DEVELOPMENT_PASSWORD'] %>
+  socket: /tmp/mysql.sock
+  database: visitas_development
