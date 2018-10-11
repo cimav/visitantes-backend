@@ -1,14 +1,19 @@
 class VisitsController < ApplicationController
 
   def index
-            # d /m / y
-    fecha = '01/10/2018'.to_datetime # Date.today
 
-    # "DATE(date) >= ?", fecha
+    if Rails.env.include? "dev"
 
-    @visits = Visit.includes(:visit_people).select(:id, :institution, :resp_name, :date, :status).where("DATE(date) >= ? AND status=3",fecha).order("visit_people.person_type DESC, visit_people.name") rescue nil
+      # d /m / y
+      fecha = '01/10/2018'.to_datetime # Date.today
 
-    # @visits = Visit.includes(:visit_people).select(:id, :institution, :resp_name, :date, :status).where("date = ? AND status=3", Date.today).order("visit_people.name") rescue nil
+      # "DATE(date) >= ?", fecha
+
+      @visits = Visit.includes(:visit_people).select(:id, :institution, :resp_name, :date, :status).where("DATE(date) >= ? AND status=3",fecha).order("visit_people.person_type DESC, visit_people.name") rescue nil
+
+    else
+      @visits = Visit.includes(:visit_people).select(:id, :institution, :resp_name, :date, :status).where("date = ? AND status=3", Date.today).order("visit_people.person_type DESC, visit_people.name") rescue nil
+    end
 
     render json: @visits, include: :visit_people
 =begin

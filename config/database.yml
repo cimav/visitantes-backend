@@ -52,7 +52,7 @@ visitas_programadas_production:
   username: admin
   password: <%= ENV['VISITAS_PRODUCTION_PASSWORD'] %>
   socket: /tmp/mysql.sock
-  database: visitas_development
+  database: visitas_production
 
 visitas_programadas_development:
   adapter: mysql2
