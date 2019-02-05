@@ -15,6 +15,7 @@ production:
   <<: *default
   host: 10.0.0.13
   database: visitantes
+  password: <%= ENV['VISITANTES_PASSWORD'] %>
 
 #development_cimavnetmultix:
 #  adapter: mysql2
