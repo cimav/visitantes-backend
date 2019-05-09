@@ -20,6 +20,7 @@ class MainController < ApplicationController
     conditions = []
     values = []
 
+    conditions << "(visitas.sede = #{current_user.sede})"
 
     if apellido
       #conditions << '(visitantes.apellido like ?)'
