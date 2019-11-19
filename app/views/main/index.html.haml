@@ -147,7 +147,13 @@
       localStorage.setItem('inicial', inicial);
       localStorage.setItem('final', final);
 
-      var url = "main/grid/" + inicial + "/" + final + "/" + apellido + "/" + empresa + "/"  + persona;
+      var sedeId = localStorage.getItem('sede-id') || 0;
+      if (sedeId == 0) {
+        sedeId = 1;
+        localStorage.setItem('sede-id', 1);
+      }
+
+      var url = "main/grid/" + inicial + "/" + final + "/" + apellido + "/" + empresa + "/"  + persona + "/" + sedeId;
 
       if (isExcel) {
         url = url + '.xlsx';

@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= Usuario.find(session[:user_id]) if session[:user_id]
   end
 
+  def current_sede
+
+  end
+
   SEDES = {
       1 => 'Chihuahua',
       2 => 'Cd. Juárez',

@@ -20,7 +20,9 @@ class MainController < ApplicationController
     conditions = []
     values = []
 
-    conditions << "(visitas.sede = #{current_user.sede})"
+    #conditions << "(visitas.sede = #{current_user.sede})"
+    sede_id = params[:sede_id] if params[:sede_id].present? rescue 1
+    conditions << "(visitas.sede = #{sede_id})"
 
     if apellido
       #conditions << '(visitantes.apellido like ?)'

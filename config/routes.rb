@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :grid
   get 'main/index'
-  get 'main/grid/:inicial/:final/:apellido/:empresa/:persona', to: 'main#grid'
+  get 'main/grid/:inicial/:final/:apellido/:empresa/:persona/:sede_id', to: 'main#grid'
 
   root to: 'main#index'
   #root :to => 'home#index'
