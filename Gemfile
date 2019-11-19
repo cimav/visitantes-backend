@@ -67,7 +67,8 @@ gem 'materialize-sass'
 gem 'axlsx_rails'
 
 group :production do
-  gem 'therubyracer', :platform => :ruby
+  # gem 'therubyracer', :platform => :ruby
+  gem 'mini_racer', :platform => :ruby
 end
 
 gem 'omniauth-google-oauth2' #, '0.2.6'
